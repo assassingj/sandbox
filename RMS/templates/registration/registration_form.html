@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block content %}
+<div class="form_settings">
+<form method="post" action="."> {% csrf_token %}
+  {% for field in form.visible_fields  %}
+    {% if forloop.first %}
+      {% for hidden in form.hidden_fields %} 
+        {{ hidden }} 
+      {% endfor %} 
+    {% endif %} 
+    <span>{{ field.errors }}</span>
+    <p><span>{{ field.label_tag }}</span> {{ field }}</p> 
+  {% endfor %} 
+
+  <input type="submit" value="{% trans 'Submit' %}" />
+</form>
+</div>
+{% endblock %}

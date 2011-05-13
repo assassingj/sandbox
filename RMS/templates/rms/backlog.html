@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+{# load blog_tags #}
+{# load comments #}
+{% block content %}
+    <script type="">
+        $(function(){
+            $("#new_backlog").click(function(){
+                window.location.href="/rms/add-backlog/"
+            })
+        })
+    </script>
+
+    <input id="new_backlog" type="button" value="New Backlog"/>
+    <table>
+        <thead>
+            <th>No.</th>
+            <th>product</th>
+            <th>Stories</th>
+            <th>Prioritized</th>
+            <th>Estimated</th>
+            <th>Value </th>
+            <th>How to Demo</th>
+            <th>Committer </th>
+            <th>State </th>
+            <th>Created </th>
+            <th>Last modified </th>
+            </thead>
+        <tbody>
+
+        {% for entry in object_list %}
+            <tr>
+                <td>{{ forloop.counter }}</td>
+                 <td>{{ entry.product }}</td>
+                <td>{{ entry.stories }}</td>
+                <td>{{ entry.prioritized }}</td>
+                <td>{{ entry.estimated }}</td>
+                <td>{{ entry.value }}</td>
+                <td>{{ entry.how_to_demo }}</td>
+                <td>{{ entry.committer }}</td>
+                <td>{{ entry.state }}</td>
+                <td>{{ entry.gmt_create|date:"Y-m-d h:i:s" }}</td>
+                <td>{{ entry.gmt_last_modify|date:"Y-m-d h:i:s"}}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+
+
+<div class="pagination">
+    <span class="step-links">
+        {% if page_obj.has_previous %}
+            <a href="?page={{ page_obj.previous_page_number }}">previous</a>
+        {% endif %}
+
+        <span class="current">
+            Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+        </span>
+
+        {% if page_obj.has_next %}
+            <a href="?page={{ page_obj.next_page_number }}">next</a>
+        {% endif %}
+    </span>
+</div>
+{% endblock %}

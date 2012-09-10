@@ -4,7 +4,7 @@
 DIR=$(dirname $0)
 cd $DIR
 BASE=`pwd`
-ifconfig | grep  inet | head -1 | awk '{print $2}' | awk -F: '{print $2}' > $BASE/ip.txt
+ifconfig | grep  -A1 eth0 | tail -1 | awk '{print $2}' | awk -F: '{print $2}' > $BASE/ip.txt
 
 echo $BASE
 cd $BASE

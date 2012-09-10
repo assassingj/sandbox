@@ -8,5 +8,5 @@ ifconfig | grep  inet | head -1 | awk '{print $2}' | awk -F: '{print $2}' > $BAS
 
 echo $BASE
 cd $BASE
-git commit -a -m "new ip"
+git commit -m "new ip at `date`"
 git push origin
